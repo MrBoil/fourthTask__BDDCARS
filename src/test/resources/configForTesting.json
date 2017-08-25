@@ -1,8 +1,7 @@
 {
-  "siteName" : "http://store.steampowered.com/",
+  "siteName" : "http://cars.com/",
   "browser" : "firefox",
   "implicitlyWaitTime" : 20,
   "scriptTimeoutTime" : 20,
-  "webDriverWaitTime" : 30,
-  "nameOfDownload" : "steam.dmg"
+  "webDriverWaitTime" : 30
 }

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>a1qaTest</groupId>
-    <artifactId>secondTask_SELENIUM</artifactId>
+    <artifactId>fourthTask_BDDCARS</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -44,7 +44,7 @@
                     <version>2.20</version>
                     <configuration>
                         <suiteXmlFiles>
-                            <suiteXmlFile>ParentSuite.xml</suiteXmlFile>
+                            <suiteXmlFile>src/test/resources/${suite}.xml</suiteXmlFile>
                         </suiteXmlFiles>
                     </configuration>
                 </plugin>
