@@ -29,7 +29,7 @@ public class Select extends BaseElement {
         select.selectByIndex(value);
     }
 
-    public List<WebElement> getAllOptions() throws InterruptedException {
+    public List<WebElement> getAllOptions() {
         select = instanceSelect();
         return select.getOptions();
     }

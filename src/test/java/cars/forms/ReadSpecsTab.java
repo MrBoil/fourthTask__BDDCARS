@@ -15,15 +15,15 @@ public class ReadSpecsTab {
     private List<WebElement> options;
 
     public void selectRandomMakeModelYearAndSearch() throws InterruptedException {
-        options = slcCarMake.getAllOptions();
-        slcCarMake.setValueByIndex(new Random().nextInt(options.size()));
-
-        options = slcCarModel.getAllOptions();
-        slcCarModel.setValueByIndex(new Random().nextInt(options.size()));
-
-        options = slcCarYear.getAllOptions();
-        slcCarYear.setValueByIndex(new Random().nextInt(options.size()));
+        selectRnd(slcCarMake);
+        selectRnd(slcCarModel);
+        selectRnd(slcCarYear);
         search.clickViaAction();
+    }
+
+    private void selectRnd(Select selectObj) throws InterruptedException {
+        options = selectObj.getAllOptions();
+        selectObj.setValueByIndex(new Random().nextInt(options.size()));
     }
 
 }
