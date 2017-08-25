@@ -1,0 +1,8 @@
+{
+  "siteName" : "http://store.steampowered.com/",
+  "browser" : "firefox",
+  "implicitlyWaitTime" : 20,
+  "scriptTimeoutTime" : 20,
+  "webDriverWaitTime" : 30,
+  "nameOfDownload" : "steam.dmg"
+}
