@@ -35,6 +35,5 @@ public class StepsForCars {
     @And("^Клацаем Trims$")
     public void клацаемTrims() throws Throwable {
         carPageMenu.navigateTrims().navigateTrimComparison();
-        carPage.saveFirstCarSpecs();
     }
 }

@@ -35,7 +35,5 @@ public class TestCars {
         rsf.selectRandomMakeModelYearAndSearch();
         carPageMenu = new CarPageMenu();
         carPageMenu.navigateTrims().navigateTrimComparison();
-        carPage = new CarPage();
-        carPage.saveFirstCarSpecs();
     }
 }

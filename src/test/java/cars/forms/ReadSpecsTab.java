@@ -21,7 +21,7 @@ public class ReadSpecsTab {
         try {
             selectRndMMYandSearch();
         } catch (NoSuchElementException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             selectRndMMYandSearch();
         }
     }

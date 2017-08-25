@@ -20,7 +20,7 @@ public abstract class BaseElement {
 
     public WebElement getElement(){
         Waiters.waitForVisOfElementByLoc(locator);
-        return Waiters.wait.until(driver -> BrowserFactory.driver().findElement(locator));
+        return BrowserFactory.driver().findElement(locator);
     }
 
     public List<WebElement> getElements(){
