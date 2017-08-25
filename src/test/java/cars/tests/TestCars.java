@@ -1,5 +1,8 @@
 package cars.tests;
 
+import cars.forms.MainPage;
+import cars.forms.ReadSpecsTab;
+import cars.menu.CarPageMenu;
 import framework.BrowserFactory;
 import framework.DataFromJson;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +10,9 @@ import org.testng.annotations.*;
 
 public class TestCars {
     WebDriver driver;
+    MainPage mainPage;
+    CarPageMenu carPageMenu;
+    ReadSpecsTab rsf;
 
     @BeforeTest
     public void setUp() {
@@ -20,7 +26,12 @@ public class TestCars {
     }
 
     @Test
-    public void testCompareCars() {
-        System.out.println("done");
+    public void testCompareCars() throws InterruptedException {
+        mainPage = new MainPage();
+        mainPage.navigateSearchMenu().navigateSpecs();
+        rsf = new ReadSpecsTab();
+        rsf.selectRandomMakeModelYearAndSearch();
+        carPageMenu = new CarPageMenu();
+        carPageMenu.navigateTrims();
     }
 }

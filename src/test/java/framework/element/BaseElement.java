@@ -11,23 +11,19 @@ import java.util.List;
 
 public abstract class BaseElement {
 
-    public By locator;
-    public Waiters waiter;
+    protected By locator;
 
     protected BaseElement(final By locator) {
         this.locator = locator;
     }
 
-    public void clickViaAction() {
-        new Actions(BrowserFactory.driver()).moveToElement(
-                getElement(), 1, 1).click().build().perform();
-    }
-
     public WebElement getElement(){
+        Waiters.waitForVisOfElementByLoc(locator);
         return BrowserFactory.driver().findElement(locator);
     }
 
     public List<WebElement> getElements(){
+        Waiters.waitForPreOfAllElementsByLoc(locator);
         return BrowserFactory.driver().findElements(locator);
     }
 
@@ -38,6 +34,11 @@ public abstract class BaseElement {
     public void clickViaJS() {
         ((JavascriptExecutor) BrowserFactory.driver()).executeScript("arguments[0].click()",
                 getElement());
+    }
+
+    public void clickViaAction() {
+        new Actions(BrowserFactory.driver()).moveToElement(
+                getElement(), 1, 1).click().build().perform();
     }
 
     public boolean isEnabled() {

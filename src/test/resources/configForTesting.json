@@ -1,7 +1,7 @@
 {
   "siteName" : "http://cars.com/",
-  "browser" : "firefox",
-  "implicitlyWaitTime" : 20,
-  "scriptTimeoutTime" : 20,
-  "webDriverWaitTime" : 30
+  "browser" : "chrome",
+  "implicitlyWaitTime" : 15,
+  "scriptTimeoutTime" : 15,
+  "webDriverWaitTime" : 15
 }

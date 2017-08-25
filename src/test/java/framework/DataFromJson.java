@@ -7,8 +7,6 @@ import java.io.FileReader;
 
 public class DataFromJson {
     private static String configForTestingPath = "src/test/resources/configForTesting.json";
-    private static String ruLocPath = "src/test/resources/localizations/RU.json";
-    private static String enLocPath = "src/test/resources/localizations/EN.json";
 
     private static Object readJson(String whatDoYouWant, String filePath) {
         JSONParser parser = new JSONParser();
@@ -21,10 +19,6 @@ public class DataFromJson {
             ex.printStackTrace();
             return null;
         }
-    }
-
-    public static String getSiteLocalisation() {
-        return readJson("localisation", configForTestingPath).toString();
     }
 
     public static String getSiteURL() {
