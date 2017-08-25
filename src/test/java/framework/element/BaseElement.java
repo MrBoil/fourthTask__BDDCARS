@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.List;
 
@@ -19,12 +20,12 @@ public abstract class BaseElement {
 
     public WebElement getElement(){
         Waiters.waitForVisOfElementByLoc(locator);
-        return BrowserFactory.driver().findElement(locator);
+        return Waiters.wait.until(driver -> BrowserFactory.driver().findElement(locator));
     }
 
     public List<WebElement> getElements(){
-        Waiters.waitForPreOfAllElementsByLoc(locator);
-        return BrowserFactory.driver().findElements(locator);
+        //Waiters.waitForPreOfAllElementsByLoc(locator);
+        return Waiters.wait.until(driver -> driver.findElements(locator));
     }
 
     public void click() {
@@ -45,7 +46,7 @@ public abstract class BaseElement {
         return getElement().isEnabled();
     }
 
-    public String getText() {
+    public String getTexter() {
         return getElement().getText();
     }
 }

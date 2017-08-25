@@ -1,5 +1,6 @@
 package cars.tests;
 
+import cars.forms.CarPage;
 import cars.forms.MainPage;
 import cars.forms.ReadSpecsTab;
 import cars.menu.CarPageMenu;
@@ -13,6 +14,7 @@ public class TestCars {
     MainPage mainPage;
     CarPageMenu carPageMenu;
     ReadSpecsTab rsf;
+    CarPage carPage;
 
     @BeforeTest
     public void setUp() {
@@ -32,6 +34,8 @@ public class TestCars {
         rsf = new ReadSpecsTab();
         rsf.selectRandomMakeModelYearAndSearch();
         carPageMenu = new CarPageMenu();
-        carPageMenu.navigateTrims();
+        carPageMenu.navigateTrims().navigateTrimComparison();
+        carPage = new CarPage();
+        carPage.saveFirstCarSpecs();
     }
 }

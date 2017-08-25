@@ -1,6 +1,7 @@
-Feature: CarsComFeature
-  Deals with searching car model.
+Feature: Сайт Cars
 
-  Scenario: Searching a car with random specs
-    Given setUp a driver
-    And navigate to RST
+  Scenario:  Поиск машины и клацание кнопочки Trims
+    Given Открываем главную страницу сайта
+    And Переходим в поиск машины по марке/модели/году
+    And Заполняем поля рандомными значениями и ищем
+    And Клацаем Trims

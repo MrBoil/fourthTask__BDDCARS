@@ -1,10 +1,13 @@
 package cars.forms;
 
+import framework.Waiters;
 import framework.element.Button;
 import framework.element.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class ReadSpecsTab {
@@ -14,16 +17,30 @@ public class ReadSpecsTab {
     private Button search = new Button(By.xpath("//div[@class='hsw-submit']"));
     private List<WebElement> options;
 
-    public void selectRandomMakeModelYearAndSearch() throws InterruptedException {
+    public void selectRandomMakeModelYearAndSearch() {
+        try {
+            selectRndMMYandSearch();
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            selectRndMMYandSearch();
+        }
+    }
+
+    private void selectRndMMYandSearch() {
         selectRnd(slcCarMake);
         selectRnd(slcCarModel);
         selectRnd(slcCarYear);
         search.clickViaAction();
     }
 
-    private void selectRnd(Select selectObj) throws InterruptedException {
+    private void selectRnd(Select selectObj) {
         options = selectObj.getAllOptions();
-        selectObj.setValueByIndex(new Random().nextInt(options.size()));
+        System.out.println(options.size());
+        int rnd = new Random().nextInt(options.size());
+        if (rnd==0) {
+            selectObj.setValueByIndex(1);
+        } else {
+            selectObj.setValueByIndex(rnd);
+        }
     }
-
 }

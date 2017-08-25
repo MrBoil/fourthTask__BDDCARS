@@ -30,7 +30,7 @@ public class Select extends BaseElement {
     }
 
     public List<WebElement> getAllOptions() {
-        select = instanceSelect();
+        select = Waiters.wait.until(driver -> instanceSelect());
         return select.getOptions();
     }
 
