@@ -24,7 +24,7 @@ public abstract class BaseElement {
     }
 
     public List<WebElement> getElements(){
-        //Waiters.waitForPreOfAllElementsByLoc(locator);
+        Waiters.waitForPreOfAllElementsByLoc(locator);
         return Waiters.wait.until(driver -> driver.findElements(locator));
     }
 
