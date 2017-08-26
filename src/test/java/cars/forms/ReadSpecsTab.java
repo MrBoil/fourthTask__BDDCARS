@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class ReadSpecsTab {
@@ -18,29 +17,23 @@ public class ReadSpecsTab {
     private List<WebElement> options;
 
     public void selectRandomMakeModelYearAndSearch() {
-        try {
-            selectRndMMYandSearch();
-        } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
-            selectRndMMYandSearch();
-        }
-    }
-
-    private void selectRndMMYandSearch() {
-        selectRnd(slcCarMake);
-        selectRnd(slcCarModel);
-        selectRnd(slcCarYear);
+        Waiters.wait.until(driver -> selectRnd(slcCarMake));
+        Waiters.wait.until(driver -> selectRnd(slcCarModel));
+        Waiters.wait.until(driver -> selectRnd(slcCarYear));
         search.clickViaAction();
     }
 
-    private void selectRnd(Select selectObj) {
+    private Boolean selectRnd(Select selectObj) {
         options = selectObj.getAllOptions();
-        System.out.println(options.size());
         int rnd = new Random().nextInt(options.size());
         if (rnd==0) {
             selectObj.setValueByIndex(1);
+            System.out.println(selectObj.getNameOfSelected());
+            return true;
         } else {
             selectObj.setValueByIndex(rnd);
+            System.out.println(selectObj.getNameOfSelected());
+            return true;
         }
     }
 }

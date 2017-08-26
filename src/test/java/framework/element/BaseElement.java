@@ -46,7 +46,7 @@ public abstract class BaseElement {
         return getElement().isEnabled();
     }
 
-    public String getTexter() {
+    public String getText() {
         return getElement().getText();
     }
 }

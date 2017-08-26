@@ -34,4 +34,9 @@ public class Select extends BaseElement {
         return select.getOptions();
     }
 
+    public String getNameOfSelected() {
+        select = Waiters.wait.until(driver -> instanceSelect());
+        return select.getFirstSelectedOption().getText();
+    }
+
 }
