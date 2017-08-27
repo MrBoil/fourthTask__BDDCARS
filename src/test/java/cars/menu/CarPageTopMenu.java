@@ -6,18 +6,13 @@ import org.openqa.selenium.By;
 public class CarPageTopMenu {
     private Label lblOfTopBar;
     private Label lblInsideTB;
-    private String locOfTopBarLabel = "//li[@cui-nav-option-parent-list-item = \"%s\"]";
-    private String locOfLabelInsideTopBar = "//div[@class = 'global-nav__sub-nav']//a[text() = \"%s\"]";
+    private String locOfTopBarLabel = "//a[contains(text(), \'%s\')]";
+    private String locOfLabelInsideTopBar = "//div[@class = 'global-nav__sub-nav']//a[text() = \'%s\']";
 
-    public CarPageTopMenu navigateTopBarCategory(final String category) {
+    public CarPageTopMenu navigateTopBarCategory(final String category, final String subCategory) {
         lblOfTopBar = new Label(By.xpath(String.format(locOfTopBarLabel, category)));
         lblOfTopBar.clickViaAction();
-        return this;
-    }
-
-    public CarPageTopMenu navigateInsideTopBar(final String category) {
-        System.out.println(String.format(locOfLabelInsideTopBar, category));
-        lblInsideTB = new Label(By.xpath(String.format(locOfLabelInsideTopBar, category)));
+        lblInsideTB = new Label(By.xpath(String.format(locOfLabelInsideTopBar, subCategory)));
         lblInsideTB.clickViaAction();
         return this;
     }

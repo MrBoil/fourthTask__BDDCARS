@@ -1,5 +1,6 @@
 package cars.forms;
 
+import framework.DataToProp;
 import framework.Waiters;
 import framework.element.Button;
 import framework.element.Select;
@@ -16,23 +17,23 @@ public class ReadSpecsTab {
     private Button search = new Button(By.xpath("//div[@class='hsw-submit']"));
     private List<WebElement> options;
 
-    public void selectRandomMakeModelYearAndSearch() {
-        Waiters.wait.until(driver -> selectRnd(slcCarMake));
-        Waiters.wait.until(driver -> selectRnd(slcCarModel));
-        Waiters.wait.until(driver -> selectRnd(slcCarYear));
+    public void selectRandomMakeModelYearAndSearch(final String filename) {
+        Waiters.wait.until(driver -> selectRnd(slcCarMake, filename, "make"));
+        Waiters.wait.until(driver -> selectRnd(slcCarModel, filename, "model"));
+        Waiters.wait.until(driver -> selectRnd(slcCarYear, filename, "year"));
         search.clickViaAction();
     }
 
-    private Boolean selectRnd(Select selectObj) {
+    private Boolean selectRnd(Select selectObj, final String fileName, final String keyValue) {
         options = selectObj.getAllOptions();
         int rnd = new Random().nextInt(options.size());
-        if (rnd==0) {
-            selectObj.setValueByIndex(1);
-            System.out.println(selectObj.getNameOfSelected());
+        if (rnd!=0) {
+            selectObj.setValueByIndex(rnd);
+            DataToProp.writeCarsSpec(fileName, keyValue, selectObj.getNameOfSelected());
             return true;
         } else {
-            selectObj.setValueByIndex(rnd);
-            System.out.println(selectObj.getNameOfSelected());
+            selectObj.setValueByIndex(1);
+            DataToProp.writeCarsSpec(fileName, keyValue, selectObj.getNameOfSelected());
             return true;
         }
     }

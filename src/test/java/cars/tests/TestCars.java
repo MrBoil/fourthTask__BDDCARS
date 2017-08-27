@@ -1,26 +1,22 @@
 package cars.tests;
 
-import cars.forms.CarPage;
-import cars.forms.CarTrimComparison;
-import cars.forms.MainPage;
-import cars.forms.ReadSpecsTab;
+import cars.forms.*;
 import cars.menu.CarPageMenu;
 import cars.menu.CarPageTopMenu;
 import framework.BrowserFactory;
 import framework.DataFromJson;
-import gherkin.lexer.Da;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-
-import javax.xml.crypto.Data;
 
 public class TestCars {
     WebDriver driver;
     MainPage mainPage;
     CarPageMenu carPageMenu;
-    ReadSpecsTab rsf;
+    ReadSpecsTab readSpecsTab;
     CarTrimComparison carTrimComparison;
     CarPageTopMenu carPageTopMenu;
+    ShopPage shopPage;
+    CompareCarsSBSPage compareCarsSBSPage;
 
     @BeforeTest
     public void setUp() {
@@ -30,32 +26,39 @@ public class TestCars {
 
     @AfterTest
     public void close(){
-        driver.quit();
+        //driver.quit();
     }
 
     @Test
     public void testCompareCars() throws InterruptedException {
         mainPage = new MainPage();
-        mainPage.navigateSearchMenu().navigateSpecs();
-        rsf = new ReadSpecsTab();
-        rsf.selectRandomMakeModelYearAndSearch();
+        mainPage.navigateSearchMenu().chooseCategory("Specs & Reviews");
+        readSpecsTab = new ReadSpecsTab();
+        readSpecsTab.selectRandomMakeModelYearAndSearch("firstCar");
         carPageMenu = new CarPageMenu();
-        carPageMenu.navigateTrims().navigateTrimComparison();
+        carPageMenu.navigateCategory("Trims", "firstCar").navigateTrimComparison();
         carTrimComparison = new CarTrimComparison();
-        carTrimComparison.saveFirstCarSpecs("firstCar");
+        carTrimComparison.saveCarSpecs("firstCar");
 
-        /*driver.get(DataFromJson.getSiteURL());
+        driver.get(DataFromJson.getSiteURL());
         mainPage = new MainPage();
-        mainPage.navigateSearchMenu().navigateSpecs();
-        rsf = new ReadSpecsTab();
-        rsf.selectRandomMakeModelYearAndSearch();
+        mainPage.navigateSearchMenu().chooseCategory("Specs & Reviews");
+        readSpecsTab = new ReadSpecsTab();
+        readSpecsTab.selectRandomMakeModelYearAndSearch("secondCar");
         carPageMenu = new CarPageMenu();
-        carPageMenu.navigateTrims().navigateTrimComparison();
+        carPageMenu.navigateCategory("Trims", "secondCar").navigateTrimComparison();
         carTrimComparison = new CarTrimComparison();
-        carTrimComparison.saveFirstCarSpecs("secondCar");
+        carTrimComparison.saveCarSpecs("secondCar");
 
         driver.get(DataFromJson.getSiteURL());
         carPageTopMenu = new CarPageTopMenu();
-        carPageTopMenu.navigateTopBarCategory("Buy").navigateInsideTopBar("Find Cars for Sale");*/
+        carPageTopMenu.navigateTopBarCategory("Buy", "Find Cars for Sale");
+
+        shopPage = new ShopPage();
+        shopPage.navigateSideBySideComp();
+
+        compareCarsSBSPage = new CompareCarsSBSPage();
+        compareCarsSBSPage.enterCarToCompare("firstCar", "Start Comparing Now")
+                .addAnotherCar().enterCarToCompare("secondCar", "Done");
     }
 }

@@ -4,9 +4,11 @@ import framework.element.Label;
 import org.openqa.selenium.By;
 
 public class SearchMenu {
-    Label lblSpecs = new Label(By.xpath("//a[contains(text(), 'Specs & Reviews')]"));
+    private Label lblSpecs;
+    private final String locOfCategoryInsideSearchMenu = "//a[contains(text(), \'%s\')]";
 
-    public void navigateSpecs() {
+    public void chooseCategory(final String category) {
+        lblSpecs = new Label(By.xpath(String.format(locOfCategoryInsideSearchMenu, category)));
         lblSpecs.click();
     }
 }

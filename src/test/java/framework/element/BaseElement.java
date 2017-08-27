@@ -42,8 +42,16 @@ public abstract class BaseElement {
                 getElement(), 1, 1).click().build().perform();
     }
 
+    public By getLocator() {
+        return locator;
+    }
+
     public boolean isEnabled() {
         return getElement().isEnabled();
+    }
+
+    public boolean isDisplayed() {
+        return getElement().isDisplayed();
     }
 
     public String getText() {
