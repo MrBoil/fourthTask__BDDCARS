@@ -54,6 +54,10 @@ public abstract class BaseElement {
         return getElement().isDisplayed();
     }
 
+    public boolean isSelected() {
+        return getElement().isSelected();
+    }
+
     public String getText() {
         return getElement().getText();
     }

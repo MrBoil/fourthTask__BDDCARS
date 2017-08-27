@@ -22,6 +22,7 @@ public class CarPageMenu {
             BrowserFactory.driver().navigate().back();
             new SearchMenu().chooseCategory("Specs & Reviews");
             new ReadSpecsTab().selectRandomMakeModelYearAndSearch(emergencyFileName);
+            new CarPageMenu().navigateCategory(category, emergencyFileName);
         }
         return new CarPage();
     }

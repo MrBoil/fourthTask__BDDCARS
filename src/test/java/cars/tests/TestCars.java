@@ -2,7 +2,7 @@ package cars.tests;
 
 import cars.forms.*;
 import cars.menu.CarPageMenu;
-import cars.menu.CarPageTopMenu;
+import cars.menu.MainPageTopMenu;
 import framework.BrowserFactory;
 import framework.DataFromJson;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +14,7 @@ public class TestCars {
     CarPageMenu carPageMenu;
     ReadSpecsTab readSpecsTab;
     CarTrimComparison carTrimComparison;
-    CarPageTopMenu carPageTopMenu;
+    MainPageTopMenu mainPageTopMenu;
     ShopPage shopPage;
     CompareCarsSBSPage compareCarsSBSPage;
 
@@ -51,8 +51,8 @@ public class TestCars {
         carTrimComparison.saveCarSpecs("secondCar");
 
         driver.get(DataFromJson.getSiteURL());
-        carPageTopMenu = new CarPageTopMenu();
-        carPageTopMenu.navigateTopBarCategory("Buy", "Find Cars for Sale");
+        mainPageTopMenu = new MainPageTopMenu();
+        mainPageTopMenu.navigateTopBarCategory("Buy", "Find Cars for Sale");
 
         shopPage = new ShopPage();
         shopPage.navigateSideBySideComp();

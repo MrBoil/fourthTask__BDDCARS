@@ -26,5 +26,4 @@ public class CompareCarsSBSPage {
         lblAddAnother.click();
         return this;
     }
-
 }
