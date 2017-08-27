@@ -9,7 +9,7 @@ public class CarTrimComparison {
     private Label lblTransmission = new Label(By.xpath("//div[@class='cell grow-2']"));
 
     public void saveCarSpecs(final String fileName) {
-        DataToProp.writeCarsSpec(fileName, "engine", lblEngine.getText());
-        DataToProp.writeCarsSpec(fileName, "transmission", lblTransmission.getText());
+        DataToProp.writeDataToProp(fileName, "engine", lblEngine.getText());
+        DataToProp.writeDataToProp(fileName, "transmission", lblTransmission.getText());
     }
 }

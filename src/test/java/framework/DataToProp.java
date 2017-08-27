@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class DataToProp {
 
-    public static void writeCarsSpec(final String fileName, final String key, final String value) {
+    public static void writeDataToProp(final String fileName, final String key, final String value) {
         File file = new File("src/test/java/cars/models/" + fileName + ".properties");
         InputStream in = null;
         OutputStream out = null;
@@ -34,5 +34,16 @@ public class DataToProp {
                 }
             }
         }
+    }
+
+    public static String readDataFromProp(final String fileName, final String keyValue) {
+        Properties props = new Properties();
+        try {
+            props.load(new FileInputStream(
+                    new File("src/test/java/cars/models/" + fileName + ".properties")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return props.getProperty(keyValue);
     }
 }

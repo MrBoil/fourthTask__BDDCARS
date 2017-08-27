@@ -1,7 +1,9 @@
 package cars.menu;
 
+import framework.Waiters;
 import framework.element.Label;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CarPageTopMenu {
     private Label lblOfTopBar;
@@ -11,7 +13,11 @@ public class CarPageTopMenu {
 
     public CarPageTopMenu navigateTopBarCategory(final String category, final String subCategory) {
         lblOfTopBar = new Label(By.xpath(String.format(locOfTopBarLabel, category)));
-        lblOfTopBar.clickViaAction();
+        Waiters.wait.until(ExpectedConditions
+                .elementToBeClickable(By.xpath(String.format(locOfTopBarLabel, category))));
+        Waiters.wait.until(ExpectedConditions
+                .presenceOfElementLocated(By.xpath(String.format(locOfTopBarLabel, category))));
+        lblOfTopBar.click();
         lblInsideTB = new Label(By.xpath(String.format(locOfLabelInsideTopBar, subCategory)));
         lblInsideTB.clickViaAction();
         return this;

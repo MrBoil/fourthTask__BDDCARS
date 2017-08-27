@@ -16,8 +16,10 @@ public class Label extends BaseElement {
                 .moveToElement(getElement(), 1, 1).build().perform();
     }
 
-    public void submit() {
-        getElement().submit();
+    @Override
+    public void clickViaJS() {
+        ((JavascriptExecutor) BrowserFactory.driver()).executeScript("arguments[0].click()",
+                getElement());
     }
 
 }

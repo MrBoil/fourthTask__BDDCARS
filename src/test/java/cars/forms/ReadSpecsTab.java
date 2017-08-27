@@ -29,11 +29,11 @@ public class ReadSpecsTab {
         int rnd = new Random().nextInt(options.size());
         if (rnd!=0) {
             selectObj.setValueByIndex(rnd);
-            DataToProp.writeCarsSpec(fileName, keyValue, selectObj.getNameOfSelected());
+            DataToProp.writeDataToProp(fileName, keyValue, selectObj.getNameOfSelected());
             return true;
         } else {
             selectObj.setValueByIndex(1);
-            DataToProp.writeCarsSpec(fileName, keyValue, selectObj.getNameOfSelected());
+            DataToProp.writeDataToProp(fileName, keyValue, selectObj.getNameOfSelected());
             return true;
         }
     }
