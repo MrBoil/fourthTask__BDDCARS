@@ -82,7 +82,9 @@ public class CarsSteps {
 
     @Then("^Характеристики успешно записаны в ([^\"]*)$")
     public void характеристикиУспешноЗаписаныВФайл(String fileName) throws Throwable {
-        Assert.assertEquals(carTrimsPage.getLblEngineText(), DataProp.readDataFromProp(fileName, "engine"));
-        Assert.assertEquals(carTrimsPage.getLblTransmissionText(), DataProp.readDataFromProp(fileName, "transmission"));
+        Assert.assertEquals(carTrimsPage.getLblEngineText(), DataProp.readDataFromProp(fileName, "engine"),
+                "Произошла ошибка записи Engine в файл: " + fileName);
+        Assert.assertEquals(carTrimsPage.getLblTransmissionText(), DataProp.readDataFromProp(fileName, "transmission"),
+                "Произошла ошибка записи Transmission в файл: " + fileName);
     }
 }
