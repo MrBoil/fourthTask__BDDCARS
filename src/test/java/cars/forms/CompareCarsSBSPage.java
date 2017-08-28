@@ -13,6 +13,10 @@ public class CompareCarsSBSPage {
     private Button btnCompare;
     private Label lblAddAnother = new Label(By.xpath("//div[@class = 'add-car-icon']"));
 
+    private Label lblSectionOfCompare;
+    private String locSection = "//cars-compare-compare-info[@header = \'%s\']";
+    private String locCharacteristic = "//span[%s]/p";
+
     public CompareCarsSBSPage enterCarToCompare(final String fileName, final String buttonName) {
         slcMake.setValueByVisibleText(DataProp.readDataFromProp(fileName, "make"));
         slcModel.setValueByVisibleText(DataProp.readDataFromProp(fileName, "model"));
@@ -26,4 +30,11 @@ public class CompareCarsSBSPage {
         lblAddAnother.click();
         return this;
     }
+
+    public String getCarSpec(final String category, final int carNumber) {
+        lblSectionOfCompare = new Label(By.xpath(String.format(locSection, category)
+                + String.format(locCharacteristic, String.valueOf(carNumber))));
+        return lblSectionOfCompare.getText().replace(",", "");
+    }
+
 }

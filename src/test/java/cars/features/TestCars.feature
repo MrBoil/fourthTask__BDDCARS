@@ -22,9 +22,8 @@ Feature: Сайт Cars
   Сравнение двух ранее выбранных машин на сайте cars.com
 
     Given Открываем главную страницу "https://cars.com"
-    When Через меню "Buy" переходим в подкатегорию "Find Cars for Sale"
+    When Через меню "Buy" переходим в подкатегорию "Research Car Models"
       And Переходим в разделе Side-by-Side Comparisons по кнопке 'Compare cars'
-    Then Открылась страница для выбора авто для сравнения
     When Выбираем первую модель, отобранную в предыдущем сценарии, из "firstCar" и переходим по "Start Comparing Now"
       And Выбираем вторую модель из "secondCar" и переходим по копке "Done"
-    When Проверяем страницу сравнения 2-ух моделей на соотвествие характеристикам из "firstCar" и "secondCar"
+    Then Проверяем страницу сравнения 2-ух моделей на соотвествие "Engine" и "Transmission" из "firstCar" и "secondCar"

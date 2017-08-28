@@ -12,8 +12,4 @@ public class SearchMenu {
         lblSpecs.click();
     }
 
-    public boolean rightCategoryIsSelected(final String category) {
-        return new Label(By.xpath(String.format(locOfCategoryInsideSearchMenu, category))).isSelected();
-    }
-
 }
