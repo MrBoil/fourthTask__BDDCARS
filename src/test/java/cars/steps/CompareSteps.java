@@ -9,6 +9,7 @@ import cucumber.api.java.en.When;
 import framework.BrowserFactory;
 import framework.DataProp;
 import framework.Logger;
+import framework.Waiters;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.asserts.Assertion;
@@ -53,27 +54,24 @@ public class CompareSteps {
     @Then("^Проверяем страницу сравнения 2-ух моделей на соотвествие \"([^\"]*)\" и \"([^\"]*)\" из \"([^\"]*)\" и \"([^\"]*)\"$")
     public void проверяемСтраницуСравненияУхМоделейНаСоотвествиеИИзИ(
             String firstCategory, String secondCategory, String firstFileName, String secondFileNam) {
-        System.out.println(compareCarsSBSPage.getCarSpec(firstCategory, 1));
-        System.out.println(compareCarsSBSPage.getCarSpec(secondCategory, 1));
-        System.out.println(compareCarsSBSPage.getCarSpec(firstCategory, 2));
-        System.out.println(compareCarsSBSPage.getCarSpec(secondCategory, 2));
-        /*softAssert.assertEquals(compareCarsSBSPage.getCarSpec(firstCategory, 1),
-                DataProp.readDataFromProp(firstFileName, firstCategory.toLowerCase()));
-        softAssert.assertEquals(compareCarsSBSPage.getCarSpec(secondCategory, 1),
-                DataProp.readDataFromProp(firstFileName, secondCategory.toLowerCase()));
-        softAssert.assertEquals(compareCarsSBSPage.getCarSpec(firstCategory, 2),
-                DataProp.readDataFromProp(firstFileName, firstCategory.toLowerCase()));
-        softAssert.assertEquals(compareCarsSBSPage.getCarSpec(secondCategory, 2),
-                DataProp.readDataFromProp(firstFileName, secondCategory.toLowerCase()));
-        Logger.logMessage("пройдена проверка на соотвествие характеристикам ранее выбранных машин");*/
+        assertEquals(firstCategory, firstFileName, 1);
+        assertEquals(secondCategory, firstFileName, 1);
+        assertEquals(firstCategory, secondFileNam, 2);
+        assertEquals(secondCategory, secondFileNam, 2);
+        Logger.logMessage("пройдена проверка на соотвествие характеристикам ранее выбранных машин");
 
     }
 
     @Then("^Закрываем браузер$")
     public void закрываемБраузер() {
-        //BrowserFactory.driver().quit();
+        BrowserFactory.driver().quit();
         Logger.logMessage("браузер закрыт");
     }
 
+    private void assertEquals(String category, String fileName, int carNumber) {
+        Assert.assertEquals(compareCarsSBSPage.getCarSpec(category, carNumber).replace("liter", "L"),
+                DataProp.readDataFromProp(fileName, category.toLowerCase()).replace(",", ""),
+                "Данные для " + category + " не совпадают у машины " + carNumber );
+    }
 
 }

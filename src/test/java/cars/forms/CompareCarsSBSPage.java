@@ -15,7 +15,7 @@ public class CompareCarsSBSPage {
 
     private Label lblSectionOfCompare;
     private String locSection = "//cars-compare-compare-info[@header = \'%s\']";
-    private String locCharacteristic = "//span[%s]/p";
+    private String locCharacteristic = "//span[%s]//p";
 
     public CompareCarsSBSPage enterCarToCompare(final String fileName, final String buttonName) {
         slcMake.setValueByVisibleText(DataProp.readDataFromProp(fileName, "make"));

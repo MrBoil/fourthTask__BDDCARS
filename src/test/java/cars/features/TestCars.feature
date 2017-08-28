@@ -27,3 +27,4 @@ Feature: Сайт Cars
     When Выбираем первую модель, отобранную в предыдущем сценарии, из "firstCar" и переходим по "Start Comparing Now"
       And Выбираем вторую модель из "secondCar" и переходим по копке "Done"
     Then Проверяем страницу сравнения 2-ух моделей на соотвествие "Engine" и "Transmission" из "firstCar" и "secondCar"
+    Then Закрываем браузер
