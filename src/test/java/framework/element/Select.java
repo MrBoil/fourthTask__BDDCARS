@@ -44,4 +44,8 @@ public class Select extends BaseElement {
         select.selectByVisibleText(text);
     }
 
+    public String getSelectedOption() {
+        select = Waiters.wait.until(driver -> instanceSelect());
+        return select.getFirstSelectedOption().getText();
+    }
 }

@@ -1,6 +1,6 @@
 package cars.forms;
 
-import framework.DataToProp;
+import framework.DataProp;
 import framework.element.Button;
 import framework.element.Label;
 import framework.element.Select;
@@ -14,9 +14,9 @@ public class CompareCarsSBSPage {
     private Label lblAddAnother = new Label(By.xpath("//div[@class = 'add-car-icon']"));
 
     public CompareCarsSBSPage enterCarToCompare(final String fileName, final String buttonName) {
-        slcMake.setValueByVisibleText(DataToProp.readDataFromProp(fileName, "make"));
-        slcModel.setValueByVisibleText(DataToProp.readDataFromProp(fileName, "model"));
-        slcYear.setValueByVisibleText(DataToProp.readDataFromProp(fileName, "year"));
+        slcMake.setValueByVisibleText(DataProp.readDataFromProp(fileName, "make"));
+        slcModel.setValueByVisibleText(DataProp.readDataFromProp(fileName, "model"));
+        slcYear.setValueByVisibleText(DataProp.readDataFromProp(fileName, "year"));
         btnCompare = new Button(By.xpath(String.format("//button[contains(text(), \'%s\')]", buttonName)));
         btnCompare.click();
         return this;

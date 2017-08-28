@@ -3,7 +3,7 @@ package framework;
 import java.io.*;
 import java.util.Properties;
 
-public class DataToProp {
+public class DataProp {
 
     public static void writeDataToProp(final String fileName, final String key, final String value) {
         File file = new File("src/test/java/cars/models/" + fileName + ".properties");

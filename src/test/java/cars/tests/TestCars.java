@@ -34,7 +34,7 @@ public class TestCars {
         mainPage = new MainPage();
         mainPage.navigateSearchMenu().chooseCategory("Specs & Reviews");
         readSpecsTab = new ReadSpecsTab();
-        readSpecsTab.selectRandomMakeModelYearAndSearch("firstCar");
+        readSpecsTab.selectRandomMakeModelYearAndSave("firstCar");
         carPageMenu = new CarPageMenu();
         carPageMenu.navigateCategory("Trims", "firstCar").navigateTrimComparison();
         carTrimComparison = new CarTrimComparison();
@@ -44,7 +44,7 @@ public class TestCars {
         mainPage = new MainPage();
         mainPage.navigateSearchMenu().chooseCategory("Specs & Reviews");
         readSpecsTab = new ReadSpecsTab();
-        readSpecsTab.selectRandomMakeModelYearAndSearch("secondCar");
+        readSpecsTab.selectRandomMakeModelYearAndSave("secondCar");
         carPageMenu = new CarPageMenu();
         carPageMenu.navigateCategory("Trims", "secondCar").navigateTrimComparison();
         carTrimComparison = new CarTrimComparison();

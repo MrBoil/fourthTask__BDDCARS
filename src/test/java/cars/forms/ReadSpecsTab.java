@@ -1,6 +1,6 @@
 package cars.forms;
 
-import framework.DataToProp;
+import framework.DataProp;
 import framework.Waiters;
 import framework.element.Button;
 import framework.element.Select;
@@ -17,10 +17,13 @@ public class ReadSpecsTab {
     private Button search = new Button(By.xpath("//div[@class='hsw-submit']"));
     private List<WebElement> options;
 
-    public void selectRandomMakeModelYearAndSearch(final String filename) {
+    public void selectRandomMakeModelYearAndSave(final String filename) {
         Waiters.wait.until(driver -> selectRnd(slcCarMake, filename, "make"));
         Waiters.wait.until(driver -> selectRnd(slcCarModel, filename, "model"));
         Waiters.wait.until(driver -> selectRnd(slcCarYear, filename, "year"));
+    }
+
+    public void search() {
         search.clickViaAction();
     }
 
@@ -29,12 +32,24 @@ public class ReadSpecsTab {
         int rnd = new Random().nextInt(options.size());
         if (rnd!=0) {
             selectObj.setValueByIndex(rnd);
-            DataToProp.writeDataToProp(fileName, keyValue, selectObj.getNameOfSelected());
+            DataProp.writeDataToProp(fileName, keyValue, selectObj.getNameOfSelected());
             return true;
         } else {
             selectObj.setValueByIndex(1);
-            DataToProp.writeDataToProp(fileName, keyValue, selectObj.getNameOfSelected());
+            DataProp.writeDataToProp(fileName, keyValue, selectObj.getNameOfSelected());
             return true;
         }
+    }
+
+    public String getSelectedMake() {
+        return slcCarMake.getNameOfSelected();
+    }
+
+    public String getSelectedModel() {
+        return slcCarModel.getNameOfSelected();
+    }
+
+    public String getSelectedYear() {
+        return slcCarYear.getNameOfSelected();
     }
 }

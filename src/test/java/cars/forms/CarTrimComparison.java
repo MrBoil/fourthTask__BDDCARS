@@ -1,6 +1,6 @@
 package cars.forms;
 
-import framework.DataToProp;
+import framework.DataProp;
 import framework.element.Label;
 import org.openqa.selenium.By;
 
@@ -9,7 +9,7 @@ public class CarTrimComparison {
     private Label lblTransmission = new Label(By.xpath("//div[@class='cell grow-2']"));
 
     public void saveCarSpecs(final String fileName) {
-        DataToProp.writeDataToProp(fileName, "engine", lblEngine.getText());
-        DataToProp.writeDataToProp(fileName, "transmission", lblTransmission.getText());
+        DataProp.writeDataToProp(fileName, "engine", lblEngine.getText());
+        DataProp.writeDataToProp(fileName, "transmission", lblTransmission.getText());
     }
 }

@@ -1,5 +1,6 @@
 package cars.forms;
 
+import cars.menu.CarPageMenu;
 import framework.element.Label;
 import org.openqa.selenium.By;
 
@@ -9,4 +10,9 @@ public class CarPage {
     public void navigateTrimComparison(){
         lblTrimComp.clickViaJS();
     }
+
+    public CarPageMenu navigateToMenu() {
+        return new CarPageMenu();
+    }
+
 }
