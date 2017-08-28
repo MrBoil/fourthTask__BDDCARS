@@ -1,13 +1,5 @@
 
 
-
-When Записываем характеристики: Engine, Transmission в файл <файл>
-Then Характеристики успешно записаны
-Examples:
-| файл      |
-| firstCar  |
-| secondCar |
-
 Scenario:
 Сравнение двух ранее выбранных машин
 

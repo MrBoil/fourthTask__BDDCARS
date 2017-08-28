@@ -14,5 +14,4 @@ public class CarPage {
     public CarPageMenu navigateToMenu() {
         return new CarPageMenu();
     }
-
 }

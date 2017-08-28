@@ -10,17 +10,9 @@ import org.openqa.selenium.TimeoutException;
 public class CarPageMenu {
     private Label lblTrims;
 
-    public CarPage navigateCategory(final String category, final String emergencyFileName) {
-        try {
-            lblTrims = new Label(By.partialLinkText(category));
-            lblTrims.clickViaJS();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-            BrowserFactory.driver().navigate().back();
-            new SearchMenu().chooseCategory("Specs & Reviews");
-            new ReadSpecsTab().selectRandomMakeModelYearAndSave(emergencyFileName);
-            new CarPageMenu().navigateCategory(category, emergencyFileName);
-        }
+    public CarPage navigateCategory(final String category) {
+        lblTrims = new Label(By.partialLinkText(category));
+        lblTrims.clickViaJS();
         return new CarPage();
     }
 }

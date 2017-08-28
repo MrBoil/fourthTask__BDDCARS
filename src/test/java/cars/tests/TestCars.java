@@ -13,7 +13,8 @@ public class TestCars {
     MainPage mainPage;
     CarPageMenu carPageMenu;
     ReadSpecsTab readSpecsTab;
-    CarTrimComparison carTrimComparison;
+    CarTrimsPage carTrimsPage;
+    CarPage carPage = new CarPage();
     MainPageTopMenu mainPageTopMenu;
     ShopPage shopPage;
     CompareCarsSBSPage compareCarsSBSPage;
@@ -36,17 +37,17 @@ public class TestCars {
         readSpecsTab = new ReadSpecsTab();
         readSpecsTab.selectRandomMakeModelYearAndSave("firstCar");
         carPageMenu = new CarPageMenu();
-        carPageMenu.navigateCategory("Trims", "firstCar").navigateTrimComparison();
-        carTrimComparison = new CarTrimComparison();
-        carTrimComparison.saveCarSpecs("firstCar");
+        carPageMenu.navigateCategory("Trims").navigateTrimComparison();
+        carTrimsPage = new CarTrimsPage();
+        carTrimsPage.saveCarSpecs("firstCar");
 
-        driver.get(DataFromJson.getSiteURL());
+        /*driver.get(DataFromJson.getSiteURL());
         mainPage = new MainPage();
         mainPage.navigateSearchMenu().chooseCategory("Specs & Reviews");
         readSpecsTab = new ReadSpecsTab();
         readSpecsTab.selectRandomMakeModelYearAndSave("secondCar");
         carPageMenu = new CarPageMenu();
-        carPageMenu.navigateCategory("Trims", "secondCar").navigateTrimComparison();
+        carPageMenu.navigateCategory("Trims").navigateTrimComparison();
         carTrimComparison = new CarTrimComparison();
         carTrimComparison.saveCarSpecs("secondCar");
 
@@ -59,6 +60,6 @@ public class TestCars {
 
         compareCarsSBSPage = new CompareCarsSBSPage();
         compareCarsSBSPage.enterCarToCompare("firstCar", "Start Comparing Now")
-                .addAnotherCar().enterCarToCompare("secondCar", "Done");
+                .addAnotherCar().enterCarToCompare("secondCar", "Done");*/
     }
 }
