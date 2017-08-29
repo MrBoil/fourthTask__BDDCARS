@@ -2,6 +2,7 @@ package cars.menu;
 
 import framework.element.Label;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 
 public class MainPageTopMenu {
     private Label lblOfTopBar;
@@ -11,9 +12,16 @@ public class MainPageTopMenu {
 
     public MainPageTopMenu navigateTopBarCategory(final String category, final String subCategory) {
         lblOfTopBar = new Label(By.xpath(String.format(locOfTopBarLabel, category)));
+        System.out.println(lblOfTopBar.isEnabled());
+        System.out.println(lblOfTopBar.isDisplayed());
         lblOfTopBar.click();
         lblInsideTB = new Label(By.xpath(String.format(locOfLabelInsideTopBar, subCategory)));
-        lblInsideTB.clickViaAction();
+        try {
+            lblInsideTB.clickViaAction();
+        } catch (TimeoutException e) {
+            lblOfTopBar.clickViaAction();
+            lblInsideTB.clickViaAction();
+        }
         return this;
     }
 

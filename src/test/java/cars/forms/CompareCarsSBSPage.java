@@ -5,6 +5,7 @@ import framework.element.Button;
 import framework.element.Label;
 import framework.element.Select;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class CompareCarsSBSPage {
     private Select slcMake = new Select(By.xpath("//select[@name = 'makeDropdown']"));
@@ -31,10 +32,10 @@ public class CompareCarsSBSPage {
         return this;
     }
 
-    public String getCarSpec(final String category, final int carNumber) {
+    public WebElement[] getCarSpec(final String category, final int carNumber) {
         lblSectionOfCompare = new Label(By.xpath(String.format(locSection, category)
-                + String.format(locCharacteristic, String.valueOf(carNumber))));
-        return lblSectionOfCompare.getText().replace(",", "");
+                + String.format(locCharacteristic, carNumber, 2)));
+        return lblSectionOfCompare.getElements().toArray(new WebElement[2]);
     }
 
 }

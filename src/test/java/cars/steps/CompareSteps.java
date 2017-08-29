@@ -11,6 +11,7 @@ import framework.DataProp;
 import framework.Logger;
 import framework.Waiters;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
@@ -19,7 +20,6 @@ public class CompareSteps {
     MainPage mainPage = new MainPage();
     ResearchPage researchPage = new ResearchPage();
     CompareCarsSBSPage compareCarsSBSPage = new CompareCarsSBSPage();
-    SoftAssert softAssert = new SoftAssert();
 
     @Given("^Открываем главную страницу \"([^\"]*)\"$")
     public void открываемГлавнуюСтраницу(String siteUrl) throws Throwable {
@@ -69,9 +69,15 @@ public class CompareSteps {
     }
 
     private void assertEquals(String category, String fileName, int carNumber) {
-        Assert.assertEquals(compareCarsSBSPage.getCarSpec(category, carNumber).replace("liter", "L"),
-                DataProp.readDataFromProp(fileName, category.toLowerCase()).replace(",", ""),
-                "Данные для " + category + " не совпадают у машины " + carNumber );
+        try {
+            for (WebElement element : compareCarsSBSPage.getCarSpec(category, carNumber))
+                Assert.assertEquals(element.getText().replace("liter", "L").replace(",", ""),
+                        DataProp.readDataFromProp(fileName, category.toLowerCase()).replace(",", ""),
+                        "Данные для " + category + " не совпадают у машины " + carNumber );
+        } catch (NullPointerException ignore){
+
+        }
+
     }
 
 }
