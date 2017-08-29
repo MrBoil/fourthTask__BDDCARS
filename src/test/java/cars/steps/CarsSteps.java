@@ -1,6 +1,7 @@
 package cars.steps;
 
 import cars.forms.*;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -22,29 +23,29 @@ public class CarsSteps {
     private String siteUrl;
     private String categoryMainPageMenu;
 
-    @Given("^Производим настройку браузера и открываем главную страницу \"([^\"]*)\"$")
-    public void производимНастройкуБраузераИОткрываемГлавнуюСтраницу(String siteUrl) {
+    @Given("^We configure the browser and open the main page \"([^\"]*)\"$")
+    public void weConfigureTheBrowserAndOpenTheMainPage(String siteUrl) {
         driver = BrowserFactory.instanceBrowserFactory();
         this.siteUrl = siteUrl;
         Logger.logMessageWithParam("переход на главную страницу сайта", siteUrl);
         BrowserFactory.driver().get(siteUrl);
     }
 
-    @When("^Переходим в категорию \"([^\"]*)\", для поиска машины$")
-    public void переходимВКатегориюДляПоискаМашины(String category) {
+    @When("^We go to the category \"([^\"]*)\", to search for a machine$")
+    public void weGoToTheCategoryToSearchForAMachine(String category) {
         categoryMainPageMenu = category;
         mainPage.navigateSearchMenu().chooseCategory(category);
         Logger.logMessageWithParam("сайт успешно открыт и выбранна категория", category);
     }
 
-    @And("^Вводим случайные данные модели, марки и года выпуска машины и сохраняем их в ([^\"]*)$")
-    public void вводимСлучайныеДанныеМоделиМаркиИГодаВыпускаМашиныИСохраняемИхВФайл(String fileName) {
+    @And("^Enter random data of the model, brand and year of manufacture of the machine and store them in ([^\"]*)$")
+    public void enterRandomDataOfTheModelBrandAndYearOfManufactureOfTheMachineAndStoreThemInFile(String fileName) {
         Logger.logMessageWithParam("ввод случайных значений машины и сохранение их в файл", fileName);
         readSpecsTab.selectRandomMakeModelYearAndSave(fileName);
     }
 
-    @Then("^Если значения успешно введены, то выполним поиск$")
-    public void еслиЗначенияУспешноВведеныТоВыполнимПоиск() {
+    @Then("^If the values ​​are successfully entered, then perform a search$")
+    public void ifTheValues​​areSuccessfullyEnteredThenPerformASearch() {
         Assert.assertNotEquals(readSpecsTab.getSelectedMake(), "Select a Make");
         Assert.assertNotEquals(readSpecsTab.getSelectedModel(), "Select a Model");
         Assert.assertNotEquals(readSpecsTab.getSelectedYear(), "Select a Year");
@@ -53,44 +54,43 @@ public class CarsSteps {
         readSpecsTab.search();
     }
 
-    @When("^Переходим в меню во вкладку \"([^\"]*)\", но если вкладка отсуствует,повторить предыдущие пункты с записью в ([^\"]*)$")
-    public void переходимВМенюВоВкладкуНоЕслиВкладкаОтсуствуетПовторитьПредыдущиеПунктыСЗаписьюВФайл(String category, String fileName) {
+    @When("^We go to the \"([^\"]*)\" tab in the menu, but if the tab does not exist, repeat the previous items with the entry in the ([^\"]*)$")
+    public void weGoToTheTabInTheMenuButIfTheTabDoesNotExistRepeatThePreviousItemsWithTheEntryInTheFile(String category, String fileName) throws Throwable {
         try {
             carPage.navigateToMenu().navigateCategory(category);
             Logger.logMessageWithParam("переход выполнен успешно в", category);
         } catch (TimeoutException e) {
             Logger.logMessageWithParam("повторный поиск машины, т.к. не была найдена категория", category);
             BrowserFactory.driver().get(siteUrl);
-            переходимВКатегориюДляПоискаМашины(categoryMainPageMenu);
-            вводимСлучайныеДанныеМоделиМаркиИГодаВыпускаМашиныИСохраняемИхВФайл(fileName);
-            еслиЗначенияУспешноВведеныТоВыполнимПоиск();
-            переходимВМенюВоВкладкуНоЕслиВкладкаОтсуствуетПовторитьПредыдущиеПунктыСЗаписьюВФайл(category, fileName);
+            weGoToTheCategoryToSearchForAMachine(categoryMainPageMenu);
+            enterRandomDataOfTheModelBrandAndYearOfManufactureOfTheMachineAndStoreThemInFile(fileName);
+            ifTheValues​​areSuccessfullyEnteredThenPerformASearch();
+            weGoToTheTabInTheMenuButIfTheTabDoesNotExistRepeatThePreviousItemsWithTheEntryInTheFile(category, fileName);
         }
     }
 
-    @And("^Переходим по ссылке на страницу выбора модификации$")
-    public void переходимПоСсылкеНаСтраницуВыбораМодификации() {
+    @And("^Click on the link to the modification selection page$")
+    public void clickOnTheLinkToTheModificationSelectionPage() {
         Logger.logMessage("выполняется переход на страницу выбора модификации");
         carPage.navigateTrimComparison();
     }
 
-    @Then("^Успешно открылась страница выбранной модели из ([^\"]*)$")
-    public void успешноОткрыласьСтраницаВыбраннойМоделиИзФайл(String fileName) {
+    @Then("^The page of the selected model from ([^\"]*)$")
+    public void thePageOfTheSelectedModelFromFile(String fileName) {
         Assert.assertEquals(BrowserFactory.driver().getTitle().contains(DataProp.readDataFromProp(fileName, "year") + " " +
                 DataProp.readDataFromProp(fileName, "make") + " " +
                 DataProp.readDataFromProp(fileName, "model")), true);
         Logger.logMessage("страница соотвествует выбранной ранее машине");
-
     }
 
-    @When("^Записываем характеристики: Engine, Transmission в ([^\"]*)$")
-    public void записываемХарактеристикиEngineTransmissionВФайлФайл(String fileName) {
+    @When("^we write down the characteristics: Engine, Transmission in ([^\"]*)$")
+    public void weWriteDownTheCharacteristicsEngineTransmissionInFile(String fileName) {
         Logger.logMessageWithParam("запись характеристик в файл", fileName);
         carTrimsPage.saveCarSpecs(fileName);
     }
 
-    @Then("^Характеристики успешно записаны в ([^\"]*)$")
-    public void характеристикиУспешноЗаписаныВФайл(String fileName) throws Throwable {
+    @Then("^The characteristics are successfully written in ([^\"]*)$")
+    public void theCharacteristicsAreSuccessfullyWrittenInFile(String fileName) {
         Assert.assertEquals(carTrimsPage.getLblEngineText(), DataProp.readDataFromProp(fileName, "engine"),
                 "Произошла ошибка записи Engine в файл: " + fileName);
         Assert.assertEquals(carTrimsPage.getLblTransmissionText(), DataProp.readDataFromProp(fileName, "transmission"),
