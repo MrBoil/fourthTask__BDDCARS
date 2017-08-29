@@ -46,7 +46,7 @@ public class BrowserFactory {
                         System.setProperty("webdriver.chrome.driver", BrowserFactory.class.getResource("../chromedriver").getPath());
                         return new ChromeDriver(options);
                     case "win":
-                        System.setProperty("webdriver.chrome.driver", BrowserFactory.class.getResource("../chromedriver.exe").getPath());
+                        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + File.separator +"src\\test\\resources\\chromedriver.exe");
                         return new ChromeDriver(options);
                     default:
                         System.out.println(osName);
@@ -64,7 +64,7 @@ public class BrowserFactory {
                         System.setProperty("webdriver.gecko.driver", BrowserFactory.class.getResource("../geckodriver").getPath());
                         return new FirefoxDriver(profile);
                     case "win":
-                        System.setProperty("webdriver.gecko.driver", BrowserFactory.class.getResource("../geckodriver.exe").getPath());
+                        System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + File.separator +"src\\test\\resources\\geckodriver.exe");
                         return new FirefoxDriver(profile);
                     default:
                         throw new IllegalArgumentException("Invalid OS");
