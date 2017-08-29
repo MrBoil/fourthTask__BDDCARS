@@ -44,8 +44,8 @@ public class CarsSteps {
         readSpecsTab.selectRandomMakeModelYearAndSave(fileName);
     }
 
-    @Then("^If the values ​​are successfully entered, then perform a search$")
-    public void ifTheValues​​areSuccessfullyEnteredThenPerformASearch() {
+    @Then("^If the values are correct, search$")
+    public void ifTheValuesAreCorrectSearch() throws Throwable {
         Assert.assertNotEquals(readSpecsTab.getSelectedMake(), "Select a Make");
         Assert.assertNotEquals(readSpecsTab.getSelectedModel(), "Select a Model");
         Assert.assertNotEquals(readSpecsTab.getSelectedYear(), "Select a Year");
@@ -64,7 +64,7 @@ public class CarsSteps {
             BrowserFactory.driver().get(siteUrl);
             weGoToTheCategoryToSearchForAMachine(categoryMainPageMenu);
             enterRandomDataOfTheModelBrandAndYearOfManufactureOfTheMachineAndStoreThemInFile(fileName);
-            ifTheValues​​areSuccessfullyEnteredThenPerformASearch();
+            ifTheValuesAreCorrectSearch();
             weGoToTheTabInTheMenuButIfTheTabDoesNotExistRepeatThePreviousItemsWithTheEntryInTheFile(category, fileName);
         }
     }
@@ -97,4 +97,6 @@ public class CarsSteps {
                 "Произошла ошибка записи Transmission в файл: " + fileName);
         Logger.logMessageWithParam("характеристики успешно записаны в", fileName);
     }
+
+
 }

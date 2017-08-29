@@ -7,7 +7,7 @@ Feature: Сайт Cars
     Given We configure the browser and open the main page "https://cars.com"
     When We go to the category "Specs & Reviews", to search for a machine
       And Enter random data of the model, brand and year of manufacture of the machine and store them in <file>
-    Then If the values ​​are successfully entered, then perform a search
+    Then If the values are correct, search
     When We go to the "Trims" tab in the menu, but if the tab does not exist, repeat the previous items with the entry in the <file>
       And Click on the link to the modification selection page
     Then The page of the selected model from <file>
