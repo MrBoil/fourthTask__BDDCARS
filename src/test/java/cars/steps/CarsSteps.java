@@ -56,9 +56,8 @@ public class CarsSteps {
     @When("^Переходим в меню во вкладку \"([^\"]*)\", но если вкладка отсуствует,повторить предыдущие пункты с записью в ([^\"]*)$")
     public void переходимВМенюВоВкладкуНоЕслиВкладкаОтсуствуетПовторитьПредыдущиеПунктыСЗаписьюВФайл(String category, String fileName) {
         try {
-            Logger.logMessageWithParam("выполняется переход в", category);
             carPage.navigateToMenu().navigateCategory(category);
-            Logger.logMessage("переход выполнен успешно");
+            Logger.logMessageWithParam("переход выполнен успешно в", category);
         } catch (TimeoutException e) {
             Logger.logMessageWithParam("повторный поиск машины, т.к. не была найдена категория", category);
             BrowserFactory.driver().get(siteUrl);
