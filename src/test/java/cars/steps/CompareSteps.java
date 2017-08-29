@@ -58,7 +58,7 @@ public class CompareSteps {
         assertEquals(secondCategory, firstFileName, 1);
         assertEquals(firstCategory, secondFileNam, 2);
         assertEquals(secondCategory, secondFileNam, 2);
-        Logger.logMessage("пройдена проверка на соотвествие характеристикам ранее выбранных машин");
+        Logger.logMessage("пройдена проверка на соотвествие характеристик ранее выбранных машин");
 
     }
 
@@ -69,15 +69,15 @@ public class CompareSteps {
     }
 
     private void assertEquals(String category, String fileName, int carNumber) {
+        String actualSpec;
+        String fileSpec;
         try {
-            for (WebElement element : compareCarsSBSPage.getCarSpec(category, carNumber))
-                Assert.assertEquals(element.getText().replace("liter", "L").replace(",", ""),
-                        DataProp.readDataFromProp(fileName, category.toLowerCase()).replace(",", ""),
+            actualSpec = compareCarsSBSPage.getCarSpec(category, carNumber);
+            fileSpec = DataProp.readDataFromProp(fileName, category.toLowerCase()).replace(",", "");
+            Assert.assertEquals(actualSpec.contains(fileSpec), true,
                         "Данные для " + category + " не совпадают у машины " + carNumber );
         } catch (NullPointerException ignore){
-
         }
-
     }
 
 }

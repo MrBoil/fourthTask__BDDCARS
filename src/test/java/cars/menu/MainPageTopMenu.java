@@ -12,8 +12,6 @@ public class MainPageTopMenu {
 
     public MainPageTopMenu navigateTopBarCategory(final String category, final String subCategory) {
         lblOfTopBar = new Label(By.xpath(String.format(locOfTopBarLabel, category)));
-        System.out.println(lblOfTopBar.isEnabled());
-        System.out.println(lblOfTopBar.isDisplayed());
         lblOfTopBar.click();
         lblInsideTB = new Label(By.xpath(String.format(locOfLabelInsideTopBar, subCategory)));
         try {

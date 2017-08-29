@@ -32,10 +32,19 @@ public class CompareCarsSBSPage {
         return this;
     }
 
-    public WebElement[] getCarSpec(final String category, final int carNumber) {
-        lblSectionOfCompare = new Label(By.xpath(String.format(locSection, category)
-                + String.format(locCharacteristic, carNumber, 2)));
-        return lblSectionOfCompare.getElements().toArray(new WebElement[2]);
+    public String getCarSpec(final String category, final int carNumber) {
+        String spec = "";
+        try {
+            lblSectionOfCompare = new Label(By.xpath(String.format(locSection, category)
+                    + String.format(locCharacteristic, carNumber, 2)));
+            WebElement[] actualSpecs = lblSectionOfCompare.getElements().toArray(new WebElement[2]);
+            for (WebElement element:actualSpecs) {
+                spec += element.getText().replace("liter", "L").replace(",", "");
+            }
+            return spec;
+        } catch (NullPointerException ignore) {
+            return spec;
+        }
     }
 
 }
