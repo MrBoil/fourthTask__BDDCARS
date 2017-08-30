@@ -1,5 +1,6 @@
 package cars.forms;
 
+import cars.models.CarModel;
 import framework.DataProp;
 import framework.element.Button;
 import framework.element.Label;
@@ -18,10 +19,10 @@ public class CompareCarsSBSPage {
     private String locSection = "//cars-compare-compare-info[@header = \'%s\']";
     private String locCharacteristic = "//span[%s]//p";
 
-    public CompareCarsSBSPage enterCarToCompare(final String fileName, final String buttonName) {
-        slcMake.setValueByVisibleText(DataProp.readDataFromProp(fileName, "make"));
-        slcModel.setValueByVisibleText(DataProp.readDataFromProp(fileName, "model"));
-        slcYear.setValueByVisibleText(DataProp.readDataFromProp(fileName, "year"));
+    public CompareCarsSBSPage enterCarToCompare(final String carName, final String buttonName) {
+        slcMake.setValueByVisibleText(CarModel.getCarMakeModelYear(carName, "make"));
+        slcModel.setValueByVisibleText(CarModel.getCarMakeModelYear(carName, "model"));
+        slcYear.setValueByVisibleText(CarModel.getCarMakeModelYear(carName, "year"));
         btnCompare = new Button(By.xpath(String.format("//button[contains(text(), \'%s\')]", buttonName)));
         btnCompare.click();
         return this;

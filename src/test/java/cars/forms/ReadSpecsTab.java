@@ -1,5 +1,6 @@
 package cars.forms;
 
+import cars.models.CarModel;
 import framework.DataProp;
 import framework.Waiters;
 import framework.element.Button;
@@ -27,16 +28,16 @@ public class ReadSpecsTab {
         search.clickViaAction();
     }
 
-    private Boolean selectRnd(Select selectObj, final String fileName, final String keyValue) {
+    private Boolean selectRnd(Select selectObj, final String carName, final String keyValue) {
         options = selectObj.getAllOptions();
         int rnd = new Random().nextInt(options.size());
         if (rnd!=0) {
             selectObj.setValueByIndex(rnd);
-            DataProp.writeDataToProp(fileName, keyValue, selectObj.getNameOfSelected());
+            CarModel.putValue(carName, keyValue, selectObj.getNameOfSelected());
             return true;
         } else {
             selectObj.setValueByIndex(1);
-            DataProp.writeDataToProp(fileName, keyValue, selectObj.getNameOfSelected());
+            CarModel.putValue(carName, keyValue, selectObj.getNameOfSelected());
             return true;
         }
     }
