@@ -26,11 +26,13 @@ public class CarsSteps {
     private String siteUrl;
     private String categoryMainPageMenu;
     private String categoryTrims;
+    private String carName;
 
-    @Given("^We configure the browser and open the main page \"([^\"]*)\"$")
-    public void weConfigureTheBrowserAndOpenTheMainPage(String siteUrl) {
+    @Given("^We configure the browser and open the main page \"([^\"]*)\", car is \"([^\"]*)\"$")
+    public void weConfigureTheBrowserAndOpenTheMainPageCarIs(String siteUrl, String car) {
         driver = BrowserFactory.instanceBrowserFactory();
         this.siteUrl = siteUrl;
+        carName = car;
         Logger.logMessageWithParam("переход на главную страницу сайта", siteUrl);
         BrowserFactory.driver().get(siteUrl);
     }
@@ -42,8 +44,8 @@ public class CarsSteps {
         Logger.logMessageWithParam("сайт успешно открыт и выбранна категория", category);
     }
 
-    @And("^Enter random data of the model, brand and year of manufacture of the machine and store them in \"([^\"]*)\"$")
-    public void enterRandomDataOfTheModelBrandAndYearOfManufactureOfTheMachineAndStoreThemInFile(String carName) {
+    @And("^Enter random data of the model, brand and year of manufacture of the machine and store them$")
+    public void enterRandomDataOfTheModelBrandAndYearOfManufactureOfTheMachineAndStoreThem() {
         Logger.logMessageWithParam("ввод случайных значений машины и сохранение их в ", carName);
         readSpecsTab.selectRandomMakeModelYearAndSave(carName);
     }
@@ -58,8 +60,8 @@ public class CarsSteps {
         readSpecsTab.search();
     }
 
-    @When("^We go to the \"([^\"]*)\" tab in the menu, but if the tab does not exist, repeat the previous items with the entry in the \"([^\"]*)\"$")
-    public void weGoToTheTabInTheMenuButIfTheTabDoesNotExistRepeatThePreviousItemsWithTheEntryInTheFile(String category, String carName) {
+    @When("^We go to the \"([^\"]*)\" tab in the menu, but if the tab does not exist, repeat the previous items$")
+    public void weGoToTheTabInTheMenuButIfTheTabDoesNotExistRepeatThePreviousItems(String category) throws Throwable {
         try {
             categoryTrims = category;
             carPage.navigateToMenu().navigateCategory(category);
@@ -68,9 +70,9 @@ public class CarsSteps {
             Logger.logMessageWithParam("повторный поиск машины, т.к. не была найдена категория", category);
             BrowserFactory.driver().get(siteUrl);
             weGoToTheCategoryToSearchForAMachine(categoryMainPageMenu);
-            enterRandomDataOfTheModelBrandAndYearOfManufactureOfTheMachineAndStoreThemInFile(carName);
+            enterRandomDataOfTheModelBrandAndYearOfManufactureOfTheMachineAndStoreThem();
             ifTheValuesAreCorrectSearch();
-            weGoToTheTabInTheMenuButIfTheTabDoesNotExistRepeatThePreviousItemsWithTheEntryInTheFile(category, carName);
+            weGoToTheTabInTheMenuButIfTheTabDoesNotExistRepeatThePreviousItems(category);
         }
     }
 
@@ -80,22 +82,22 @@ public class CarsSteps {
         carPage.navigateTrimComparison();
     }
 
-    @Then("^The page of the selected model from \"([^\"]*)\"$")
-    public void thePageOfTheSelectedModelFromFile(String carName) {
+    @Then("^The car on page equals the selected model$")
+    public void theCarOnPageEqualsTheSelectedModel() throws Throwable {
         Assert.assertEquals(BrowserFactory.driver().getTitle().contains(CarModel.getCarMakeModelYear(carName,"year") + " " +
                 CarModel.getCarMakeModelYear(carName,"make") + " " +
                 CarModel.getCarMakeModelYear(carName,"model")), true);
         Logger.logMessage("страница соотвествует выбранной ранее машине");
     }
 
-    @When("^we write down the characteristics: Engine, Transmission in \"([^\"]*)\"$")
-    public void weWriteDownTheCharacteristicsEngineTransmissionInFile(String carName) {
+    @When("^We write down the characteristics: Engine, Transmission$")
+    public void weWriteDownTheCharacteristicsEngineTransmission() {
         Logger.logMessageWithParam("запись характеристик в ", carName);
         carTrimsPage.saveCarSpecs(carName);
     }
 
-    @Then("^The characteristics are successfully written in \"([^\"]*)\"$")
-    public void theCharacteristicsAreSuccessfullyWrittenInFile(String carName) {
+    @Then("^The characteristics are successfully written$")
+    public void theCharacteristicsAreSuccessfullyWritten() {
         Assert.assertEquals(carTrimsPage.getLblEngineText(), CarModel.getEngine(carName),
                 "Произошла ошибка записи Engine в файл: " + carName);
         Assert.assertEquals(carTrimsPage.getLblTransmissionText(), CarModel.getTransmission(carName),
@@ -107,14 +109,15 @@ public class CarsSteps {
     @Then("^Repeat everything for the \"([^\"]*)\"$")
     public void repeatEverythingForThe(String carName) throws Throwable {
         BrowserFactory.driver().get(siteUrl);
+        this.carName = carName;
         weGoToTheCategoryToSearchForAMachine(categoryMainPageMenu);
-        enterRandomDataOfTheModelBrandAndYearOfManufactureOfTheMachineAndStoreThemInFile(carName);
+        enterRandomDataOfTheModelBrandAndYearOfManufactureOfTheMachineAndStoreThem();
         ifTheValuesAreCorrectSearch();
-        weGoToTheTabInTheMenuButIfTheTabDoesNotExistRepeatThePreviousItemsWithTheEntryInTheFile(categoryTrims, carName);
+        weGoToTheTabInTheMenuButIfTheTabDoesNotExistRepeatThePreviousItems(categoryTrims);
         clickOnTheLinkToTheModificationSelectionPage();
-        thePageOfTheSelectedModelFromFile(carName);
-        weWriteDownTheCharacteristicsEngineTransmissionInFile(carName);
-        theCharacteristicsAreSuccessfullyWrittenInFile(carName);
+        theCarOnPageEqualsTheSelectedModel();
+        weWriteDownTheCharacteristicsEngineTransmission();
+        theCharacteristicsAreSuccessfullyWritten();
     }
 
     @Given("^Open the main page \"([^\"]*)\"$")
@@ -180,4 +183,7 @@ public class CarsSteps {
         } catch (NullPointerException ignore){
         }
     }
+
+
+
 }

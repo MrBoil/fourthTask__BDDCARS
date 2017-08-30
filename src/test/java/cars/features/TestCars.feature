@@ -4,15 +4,15 @@ Feature: Сайт Cars
     Search for two random cars models on cars.com website and record
     their characteristics
 
-    Given We configure the browser and open the main page "https://cars.com"
+    Given We configure the browser and open the main page "https://cars.com", car is "firstCar"
     When We go to the category "Specs & Reviews", to search for a machine
-      And Enter random data of the model, brand and year of manufacture of the machine and store them in "firstCar"
+      And Enter random data of the model, brand and year of manufacture of the machine and store them
     Then If the values are correct, search
-    When We go to the "Trims" tab in the menu, but if the tab does not exist, repeat the previous items with the entry in the "firstCar"
+    When We go to the "Trims" tab in the menu, but if the tab does not exist, repeat the previous items
       And Click on the link to the modification selection page
-    Then The page of the selected model from "firstCar"
-    When we write down the characteristics: Engine, Transmission in "firstCar"
-    Then The characteristics are successfully written in "firstCar"
+    Then The car on page equals the selected model
+    When We write down the characteristics: Engine, Transmission
+    Then The characteristics are successfully written
     Then Repeat everything for the "secondCar"
 
     Given Open the main page "https://cars.com"
